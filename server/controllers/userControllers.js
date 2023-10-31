@@ -2,7 +2,9 @@ const Appointments = require('../models/appointments');
 
 const getAppointments = async (req, res, next) => {
     try {
-        const result = await Appointments.findAll();
+        const result = await Appointments.findAll({
+            order: [["date", "DESC"]]
+        });
         res.status(200).json(result)
     } catch (error) {
         res.status(500).json({
@@ -17,7 +19,6 @@ const getAppointments = async (req, res, next) => {
 const getParticularAppointment = async (req, res, next) => {
     try {
         const id = req.params.id;
-        console.log('Delete : ' + id);
         if (!id) {
             console.log("No id provided");
             res.status(500).json({
@@ -57,7 +58,6 @@ const createAppointments = async (req, res, next) => {
         });
         console.log("failed to add item to the database. " + error);
     }
-    console.log(name, phone, date);
 }
 
 const updateAppointment = async (req, res, next) => {
@@ -97,7 +97,6 @@ const updateAppointment = async (req, res, next) => {
 
 const deleteAppointment = async (req, res, next) => {
     const id = req.params.id;
-    console.log('Delete : ' + id);
     if (!id) {
         console.log("No id provided");
     }

@@ -26,7 +26,6 @@ async function addItem(e) {
 
         try {
             await axios.post("http://localhost:3000/api/appointments", appointment);
-            await axios.get("http://localhost:3000/");
             // console.log(appointment);
             // alert("Data Added!");
             printData()
